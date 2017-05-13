@@ -1,15 +1,40 @@
-Audio :
+This repository contains notes and configuration to set up specific pulseaudio configuration
 
-Tout faire depuis PulseAudio
+# Goal
 
-Ressources :
-https://wiki.debian.org/audio-loopback
-https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype
-https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/
+The objectif is to stream an audio medium to a videoconference, along with the microphone, and while hearing both the audio medium and the videoconference.
 
-Du moment que les différentes sources et consommateurs de flux audio sont interfacés avec pulseaudio (pas trouvé de programme ne rentrant pas dans cette catégorie jusqu'à présent), tout devrait bien se passer, avec un peu de biduillage.
+TODO : add a schema here
 
-C'est stable et ça tolère très bien les interruptions et reprises, etc ...
+Also see [this stackoverflow issue](https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype), which is the main base for this repository.
 
-Reset pulseaudio configuration by killing the daemon with `pulseaudio -k`
+# Installation
 
+it is supposed that you already have a working installation of pulseaudio, launched automatically by your non-root user (case by default under Gnome, it seems).
+
+- Clone this repository : `git clone https://github.com/toadjaune/pulseaudio-config`
+- Edit the `pulse_setup.sh` script and define MICROPHONE and SPEAKERS to the values of your own.
+- Run the script : `./pulse_setup.sh`
+- Configure manually your media source and videoconference input with `pavucontrol`
+- Enjoy !
+
+# Resources
+
+These are some of the resources that I found useful when tinkering :
+- https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype
+- https://wiki.debian.org/audio-loopback
+- https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/
+- https://wiki.archlinux.org/index.php/PulseAudio
+- https://wiki.ubuntu.com/PulseAudio/Log
+
+# Heads-up
+
+Here are some of the things that are good to know, I wish I knew some before starting to do this :
+- NEVER use headphones when doing sound tinkering. It can be really dangerous, in case of driver malfunctioning, or sudden high volume.
+- None of this is reboot-proof. You will have to re-execute the script after every reboot.
+- `pulseaudio -k` restarts your pulseaudio daemon, reloading its configuration. Be careful however, it seems that sometimes it is not enough and makes weird stuff, if you have any doubt, reboot
+- TODO : explain the different kind of devices, and their links with the pavucontrol tabs
+
+# Contributions
+
+Pull requests are welcome, don't hesitate !
