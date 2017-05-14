@@ -5,8 +5,11 @@ This repository contains notes and configuration to set up specific pulseaudio c
 The objectif is to stream an audio medium to a videoconference, along with the microphone, and while hearing both the audio medium and the videoconference.
 There are schemas later in this README to explain this goal more clearly.
 
-
 Also see [this stackoverflow issue](https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype), which is the main base for this repository.
+
+# Compatibility
+
+This was tested on Fedora 25, but should work as well on any distribution using pulseaudio.
 
 # Installation
 
@@ -34,7 +37,7 @@ Here are some of the things that are good to know, I wish I knew some before sta
 Now a few explanations about the different kinds of devices involved. This is only what I have understood experimenting so far, it has no pretention to be absolutely true and flawless.
 The italicized words are vocabulary that I'm either not sure of, or made up for the sake of clarity.
 - By "device", I mean either an application connected to pulseaudio API, a driver interfacing a hardware component with pulseaudio, or a virtual device created inside pulseaudio. Pretty much everything that you will see in pavucontrol listings.
-- A sink is an audio output. 
+- A sink is an audio output.
   - The sinks are listed in the `Output Devices` of pavucontrol.
   - A sink can receive any number of streams from various _players_. In this case, these inputs are superposed.
   - The classic example of sink is speakers, or headphones.
@@ -58,7 +61,7 @@ The italicized words are vocabulary that I'm either not sure of, or made up for 
   - A good example of use is recording you desktop to make a video tutorial. A desktop recording program will likely provide you a _recorder_, that you can either attach to you microphone (to get your voice), or to the _monitor_ of your speakers (to record the sounds emitted by you desktop during the demo)
 - A null sink is a virtual sink created with the `module-null-sink` of pulseaudio.
   - It behaves like a "real" sink, except that it discards the stream instead of outputing it to speakers (or whatever).
-  - It has a _monitor_ as well
+  - It has an attached _monitor_ as well
 - A _loopback device_ is a virtual device created with the `module-loopback` of pulseaudio.
   - It behaves like the combination of a _recorder_ and an _input_, relaying the stream from the former to the latter.
   - Combined with _monitors_ and null sinks, it should allow you to do basically anything you want.
@@ -72,8 +75,8 @@ For such a situation, I'm convinced that it is essential to pick a convention th
 Here is mine, and the explanations to understand the associated logic :
 ![](images/symbols.jpg?raw=true)
 - We can notice that streams can be separated in two categories, depending on where they come from and go :
-  - Come from a _player_, and go to an _output_ (now referred as _active_ stream)
-  - Come from an _input_, and go to a _recorder_ (now referred as _passive_ stream)
+  - Come from a _player_, and go to an _output_ (referred as _active_ stream)
+  - Come from an _input_, and go to a _recorder_ (referred as _passive_ stream)
 - Each block receives stream(s) on the left, and sends stream(s) on the right
 - Since every sink always has an attached monitor, they are represented together in a single symbol
 - If the expected stream(s) on a side are _active_, the line of this side is doubled
@@ -85,7 +88,7 @@ Here is mine, and the explanations to understand the associated logic :
 
 ## How to build your setup
 Here are the steps I would recommend to follow to build your setup :
-- Choose your chema convention (if you don't like mine, you can use colors, other shapes, etc ...)
+- Choose your schema convention (if you don't like mine, you can use colors, other shapes, etc ...)
 - Add all the non-virtual devices that are relevant to your problem (everything that sends or receives streams from pulseaudio)
 - Make a simple schema to represent what you want to do, without considering constraints of types and number of streams.
 - Redo it, but respecting these constraints (it's like playing lego, you have to make the same schema as above, but with only certain bricks !)

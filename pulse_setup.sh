@@ -24,7 +24,7 @@ pactl load-module module-loopback source=virtual1.monitor sink=$SPEAKERS
 pactl load-module module-loopback source=virtual1.monitor sink=virtual2
 pactl load-module module-loopback source=$MICROPHONE sink=virtual2
 
-# If you struggle to find the correct values of your physical devices, you can also simply let these undefined, qnd configure evrything manually via pavucontrol
+# If you struggle to find the correct values of your physical devices, you can also simply let these undefined, and configure evrything manually via pavucontrol
 # pactl load-module module-loopback source=virtual1.monitor
 # pactl load-module module-loopback source=virtual1.monitor sink=virtual2
 # pactl load-module module-loopback sink=virtual2
