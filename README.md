@@ -3,8 +3,8 @@ This repository contains notes and configuration to set up specific pulseaudio c
 # Goal
 
 The objectif is to stream an audio medium to a videoconference, along with the microphone, and while hearing both the audio medium and the videoconference.
+There are schemas later in this README to explain this goal more clearly.
 
-TODO : add a schema here
 
 Also see [this stackoverflow issue](https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype), which is the main base for this repository.
 
@@ -70,7 +70,7 @@ I seriously doubt that I would have reached my objective without drawing what I 
 ## My convention
 For such a situation, I'm convinced that it is essential to pick a convention that prevents you from drawing anything impossible.
 Here is mine, and the explanations to understand the associated logic :
-(TODO: Add the symbols)
+![](images/symbols.jpg?raw=true)
 - We can notice that streams can be separated in two categories, depending on where they come from and go :
   - Come from a _player_, and go to an _output_ (now referred as _active_ stream)
   - Come from an _input_, and go to a _recorder_ (now referred as _passive_ stream)
@@ -83,20 +83,24 @@ Here is mine, and the explanations to understand the associated logic :
   - A flat extremity allows any number of streams (including 0)
 - Virtual devices are hatched
 
-## My setup
-With this convention, my setup corresponds to the following schema :
-(TODO : Add the schema)
-
 ## How to build your setup
 Here are the steps I would recommend to follow to build your setup :
 - Choose your chema convention (if you don't like mine, you can use colors, other shapes, etc ...)
 - Add all the non-virtual devices that are relevant to your problem (everything that sends or receives streams from pulseaudio)
 - Make a simple schema to represent what you want to do, without considering constraints of types and number of streams.
-- Redo it, but respecting these constraints
+- Redo it, but respecting these constraints (it's like playing lego, you have to make the same schema as above, but with only certain bricks !)
 - Try to setup it manually
   - Create the virtual devices you need (see the script in this repo to see syntax), but without specifying sources, sinks, etc
   - Route everything according to your schema in pavucontrol
 - Once it works, automate it by specifying everything at device creation time in a script
+
+## My setup
+
+First, a simple schema to explain myself what I want to do :
+![](images/simple_schema.jpg?raw=true)
+
+Then, a schema following the above convention :
+![](images/full_schema.jpg?raw=true)
 
 # Resources
 
