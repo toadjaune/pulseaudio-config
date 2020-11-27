@@ -18,10 +18,12 @@ It is supposed that you already have a working installation of pulseaudio, launc
 - Clone this repository : `git clone https://github.com/toadjaune/pulseaudio-config`
 - Edit the `pulse_setup.sh` script and define MICROPHONE and SPEAKERS to the values of your own.
 - Run the script : `./pulse_setup.sh`
-  - If the script worked correctly, it should output a series of five numbers (the ids of the newly created virtual devices).
+  - If the script worked correctly, there should be a file called `modules_lists.txt` with a series of five numbers (the ids of the newly created virtual devices).
   - If it didn't, you'll have the error messages from the underlying pactl commands.
 - Configure manually your media source and videoconference input with `pavucontrol`
 - Enjoy !
+
+If for some reason the script failed or you need to reset the setup simply run `./pulse_unload.sh` to unload all previously loaded modules. This script will also be ran every time you run `./pulse_setup.sh` to clean up previous setup.
 
 # Heads-up
 
