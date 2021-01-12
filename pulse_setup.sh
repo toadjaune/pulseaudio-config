@@ -8,16 +8,25 @@
 # Use pavucontrol to make tests for your setup and to make the runtime configuration
 # Route your audio source to virtual1
 # Record your sound (videoconference) from virtual2.monitor
+#
+# To reload the modules run the script with -r (requires the module ids to be present in the file "module_list.txt"
 
 set -e
 
 MICROPHONE=${MICROPHONE:-"alsa_input.pci-0000_00_1b.0.analog-stereo"}
 SPEAKERS=${SPEAKERS:-"alsa_output.pci-0000_00_1b.0.analog-stereo"}
 
-module_file="module_list.txt"
-if [ -f "${module_file}" ]; then
-  ./pulse_unload.sh "${module_file}"
-fi
+while getopts ":r" opt; do
+  case "$opt" in
+    r )
+      module_file="module_list.txt"
+      if [ -f "${module_file}" ]; then
+        ./pulse_unload.sh "${module_file}"
+      fi
+      ;;
+    * ) ;;
+  esac
+done
 
 if ! pacmd list-sources | grep -P "^\s+name: <${MICROPHONE}>" >/dev/null; then
   echo "ERROR: Microphone (source) \"${MICROPHONE}\" was not found" >&2
