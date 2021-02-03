@@ -2,24 +2,20 @@
 
 set -e
 
-usage() {
-  echo "Usage: $0 [<file with modules to unload>]" >&2
-  exit 1
-}
-
-if [ $# -gt 1 ]; then
-  usage
-fi
-
-module_file=${1:-"module_list.txt"}
+module_file="/tmp/pulseaudio_module_list.txt"
 
 if [ ! -f "${module_file}" ]; then
   echo "ERROR: file ${module_file} doesn't exist" >&2
-  usage
+  exit 1
 fi
 
 while read -r module; do
-  pacmd unload-module "${module}"
+  if [[ "${module}" =~ ^[0-9]+$ ]]; then
+    pacmd unload-module "${module}"
+  else
+    echo "ERROR: file ${module_file} is not correctly formated" >&2
+    exit 1
+  fi
 done < "${module_file}"
 
 rm "${module_file}"
