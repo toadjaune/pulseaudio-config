@@ -17,10 +17,14 @@ It is supposed that you already have a working installation of pulseaudio, launc
 
 - Clone this repository : `git clone https://github.com/toadjaune/pulseaudio-config`
 - Edit the `pulse_setup.sh` script and define MICROPHONE and SPEAKERS to the values of your own.
+You can find your speaker/sink name with `pactl list short sinks`, it should be "RUNNING" if your're playing something.
+Use `pactl list short sources` to find your microphone/source, if in use it should also be "RUNNING". There might be two devices running, choose the one ending with _source (not _monitor).
+
 - Run the script : `./pulse_setup.sh`
   - If the script worked correctly, there should be a file called `/tmp/pulseaudio_modules_lists.txt` with a series of five numbers (the ids of the newly created virtual devices).
   - If it didn't, you'll have the error messages from the underlying pactl commands.
-- Configure manually your media source and videoconference input with `pavucontrol`
+- Configure manually your media source and videoconference input with `pavucontrol`. You have to output your program generating the audio to virtual1 in playback tab, and in select virtual2 in your videoconference software in the recording tab. Your videoconference software will show up in the recording tab only when it's running and it's recording audio, like when you're testing the microphone or you already joined the videoconference.
+- This configuration is not permanent, you will need to run the script and change the configuration in pavucontrol again on the next boot.
 - Enjoy !
 
 If for some reason the script failed or you need to reset the setup simply run `./pulse_unload.sh` to unload all previously loaded modules.
