@@ -16,7 +16,7 @@ This was tested on Fedora 25, but should work as well on any distribution using 
 It is supposed that you already have a working installation of pulseaudio, launched automatically by your non-root user (default case of Gnome, it seems).
 
 - Clone this repository : `git clone https://github.com/toadjaune/pulseaudio-config`
-- Edit the `pulse_setup.sh` script and define MICROPHONE and SPEAKERS to the values of your own.
+- Edit the `pulse_setup.sh` script and define MICROPHONE and SPEAKERS to the values of your own. (You can also pass them as environment variables)
 You can find your speaker/sink name with `pactl list short sinks`, it should be "RUNNING" if your're playing something.
 Use `pactl list short sources` to find your microphone/source, if in use it should also be "RUNNING". There might be two devices running, choose the one ending with _source (not _monitor).
 
