@@ -37,6 +37,10 @@ pactl load-module module-loopback source=virtual1.monitor sink="${SPEAKERS}" lat
 pactl load-module module-loopback source=virtual1.monitor sink=virtual2 latency_msec=1 >> "${module_file}"
 pactl load-module module-loopback source="${MICROPHONE}" sink=virtual2 latency_msec=1 >> "${module_file}"
 
+# This should not be necessary, however some programs (zoom) won't be able to see monitors
+# We could manually re-assign them with pavucontrol or similar, but creating a virtual source is more convenient
+pactl load-module module-virtual-source source_name=virtual2.mic master=virtual2.monitor source_properties=device.description=Virtual2Mic >> "${module_file}"
+
 # If you struggle to find the correct values of your physical devices, you can
 # also simply leave these undefined, and configure everything manually via pavucontrol
 # pactl load-module module-loopback source=virtual1.monitor
