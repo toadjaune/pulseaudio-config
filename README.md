@@ -2,7 +2,7 @@ This repository contains notes and configuration to set up specific pulseaudio c
 
 # Goal
 
-The objectif is to stream an audio medium to a videoconference, along with the microphone, and while hearing both the audio medium and the videoconference.
+The objective is to stream an audio medium to a videoconference, along with the microphone, and while hearing both the audio medium and the videoconference.
 There are schemas later in this README to explain this goal more clearly.
 
 Also see [this stackoverflow issue](https://askubuntu.com/questions/257992/how-can-i-use-pulseaudio-virtual-audio-streams-to-play-music-over-skype), which is the main base for this repository.
